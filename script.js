@@ -7,13 +7,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cargar tareas guardadas al iniciar
     loadTasks();
 
-    // Evento para agregar tareas
+    // Evento para agregar tareas al presionar "Add"
     addTaskBtn.addEventListener('click', () => {
         const taskText = taskInput.value.trim();
         if (taskText) {
             addTask(taskText); // Agregar la tarea
             saveTasks(); // Guardar las tareas
             taskInput.value = ''; // Limpiar el campo de entrada
+            taskInput.blur(); // Quitar el foco del input
+        }
+    });
+
+    // Quitar el foco cuando se presiona "Enter"
+    taskInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { // Detectar tecla "Enter"
+            const taskText = taskInput.value.trim();
+            if (taskText) {
+                addTask(taskText); // Agregar la tarea
+                saveTasks(); // Guardar las tareas
+                taskInput.value = ''; // Limpiar el campo de entrada
+            }
+            taskInput.blur(); // Quitar el foco del input
+            e.preventDefault(); // Evitar comportamiento por defecto del teclado
+        }
+    });
+
+    // Quitar el foco del input si se hace clic fuera de él
+    document.addEventListener('click', (e) => {
+        // Si el clic no ocurre dentro del input ni del botón "Add"
+        if (!taskInput.contains(e.target) && !addTaskBtn.contains(e.target)) {
+            taskInput.blur(); // Quitar el foco
         }
     });
 

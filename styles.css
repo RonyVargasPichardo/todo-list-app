@@ -1,4 +1,4 @@
-/* styles.css */
+/* Estilos generales */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -8,42 +8,42 @@ body {
     align-items: center;
     min-height: 100vh;
     background-color: #f5f5f5;
-  }
-  
-  .container {
+}
+
+.container {
     width: 90%;
     max-width: 400px;
     background: #ffffff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  header {
+}
+
+header {
     text-align: center;
-  }
-  
-  h1 {
+}
+
+h1 {
     font-size: 24px;
     margin-bottom: 20px;
     color: #333;
-  }
-  
-  .task-input {
+}
+
+.task-input {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-  }
-  
-  .task-input input {
+}
+
+.task-input input {
     flex: 1;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
-  }
-  
-  .task-input button {
+}
+
+.task-input button {
     padding: 10px 15px;
     margin-left: 10px;
     background-color: #007bff;
@@ -52,86 +52,88 @@ body {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-  }
-  
-  .task-input button:hover {
+}
+
+.task-input button:hover {
     background-color: #0056b3;
-  }
-  
-  ul {
+}
+
+ul {
     list-style: none;
     padding: 0;
-  }
-  
-  li {
+}
+
+li {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #ddd;
-  }
-  
-  li.completed {
+}
+
+.completed span {
     text-decoration: line-through;
-    color: #777;
-  }
-  
-  li button {
+    color: gray;
+    opacity: 0.7; /* Reducir prominencia */
+}
+
+li button {
     margin-left: 10px;
     background: none;
     border: none;
     cursor: pointer;
-  }
-  
-  li button.complete-btn {
+}
+
+li button.complete-btn {
     color: #28a745;
-  }
-  
-  li button.delete-btn {
+}
+
+li button.delete-btn {
     color: #dc3545;
-  }
-
-
-  /* Tareas completadas */
-.completed span {
-    text-decoration: line-through;
-    color: gray;
 }
 
 /* Categorías de colores */
 .category-work span {
-    color: blue;
+    color: #0000ff;
 }
 
 .category-personal span {
-    color: green;
+    color: #008000;
 }
 
 .category-urgent span {
-    color: red;
+    color: #ff0000;
 }
 
-
-  @media (max-width: 768px) {
+/* Estilos responsivos */
+@media (max-width: 768px) {
     .container {
-      width: 100%;
-      padding: 15px;
+        width: 100%;
+        padding: 15px;
     }
-  
-    h1 {
-      font-size: 20px;
+
+    .task-input {
+        flex-direction: column;
+        gap: 10px;
     }
-  
-    .task-input input {
-      font-size: 14px;
-    }
-  
+
+    .task-input input,
     .task-input button {
-      font-size: 14px;
+        width: 100%;
+        font-size: 14px;
     }
-  
+
     li {
-      font-size: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 14px;
     }
-  }
-  
+
+    li div {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        width: 100%;
+        margin-top: 10px;
+    }
+}

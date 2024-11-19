@@ -109,3 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+document.addEventListener('focusout', (e) => {
+    if (e.target.tagName === 'INPUT') {
+        document.body.style.zoom = '100%'; // Restablece el tamaño
+    }
+});
+

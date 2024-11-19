@@ -91,6 +91,27 @@ body {
     color: #dc3545;
   }
 
+
+  /* Tareas completadas */
+.completed span {
+    text-decoration: line-through;
+    color: gray;
+}
+
+/* Categorías de colores */
+.category-work span {
+    color: blue;
+}
+
+.category-personal span {
+    color: green;
+}
+
+.category-urgent span {
+    color: red;
+}
+
+
   @media (max-width: 768px) {
     .container {
       width: 100%;

@@ -1,21 +1,27 @@
-// script.js
 document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('taskInput');
     const addTaskBtn = document.getElementById('addTaskBtn');
     const taskList = document.getElementById('taskList');
+    const taskCategory = document.getElementById('taskCategory'); // Selector de categorías
 
-    // Event listener for adding tasks
+    // Cargar tareas guardadas al iniciar
+    loadTasks();
+
+    // Evento para agregar tareas
     addTaskBtn.addEventListener('click', () => {
         const taskText = taskInput.value.trim();
         if (taskText) {
-            addTask(taskText);
-            taskInput.value = ''; // Limpia el campo después de añadir la tarea
+            addTask(taskText); // Agregar la tarea
+            saveTasks(); // Guardar las tareas
+            taskInput.value = ''; // Limpiar el campo de entrada
         }
     });
 
-    // Function to add a task
+    // Función para añadir una tarea con categoría
     function addTask(taskText) {
+        const category = taskCategory.value; // Obtener la categoría seleccionada
         const li = document.createElement('li');
+        li.classList.add(`category-${category}`); // Añadir clase de categoría
         li.innerHTML = `
             <span>${taskText}</span>
             <div>
@@ -25,14 +31,58 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         taskList.appendChild(li);
 
-        // Event listeners for buttons
+        // Evento para completar la tarea
         li.querySelector('.complete-btn').addEventListener('click', () => {
             li.classList.toggle('completed');
+            saveTasks(); // Actualizar tareas al completar
         });
 
+        // Evento para eliminar la tarea
         li.querySelector('.delete-btn').addEventListener('click', () => {
             li.remove();
+            saveTasks(); // Actualizar tareas al eliminar
+        });
+    }
+
+    // Función para guardar las tareas en localStorage
+    function saveTasks() {
+        const tasks = [];
+        taskList.querySelectorAll('li').forEach((li) => {
+            tasks.push({
+                text: li.querySelector('span').textContent,
+                completed: li.classList.contains('completed'),
+                category: li.className.replace('completed', '').trim() // Guardar categoría
+            });
+        });
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    // Función para cargar las tareas desde localStorage
+    function loadTasks() {
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        tasks.forEach((task) => {
+            const li = document.createElement('li');
+            li.className = task.category; // Restaurar categoría
+            if (task.completed) li.classList.add('completed'); // Restaurar estado
+            li.innerHTML = `
+                <span>${task.text}</span>
+                <div>
+                    <button class="complete-btn">✔</button>
+                    <button class="delete-btn">✖</button>
+                </div>
+            `;
+            taskList.appendChild(li);
+
+            // Eventos para las tareas cargadas
+            li.querySelector('.complete-btn').addEventListener('click', () => {
+                li.classList.toggle('completed');
+                saveTasks(); // Actualizar tareas al completar
+            });
+
+            li.querySelector('.delete-btn').addEventListener('click', () => {
+                li.remove();
+                saveTasks(); // Actualizar tareas al eliminar
+            });
         });
     }
 });
-

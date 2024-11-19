@@ -14,9 +14,16 @@
         <main>
             <div class="task-input">
                 <input type="text" id="taskInput" placeholder="Add a new task..." />
+                <select id="taskCategory">
+                    <option value="work">Work</option>
+                    <option value="personal">Personal</option>
+                    <option value="urgent">Urgent</option>
+                </select>
                 <button id="addTaskBtn">Add</button>
             </div>
+            
             <ul id="taskList"></ul>
+
         </main>
     </div>
     <script src="script.js"></script>
